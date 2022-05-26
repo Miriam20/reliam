@@ -1,0 +1,26 @@
+\begin{algorithm}
+    \SetKwInput{KwInput}{Input}                % Set the Input
+    \SetKwInput{KwOutput}{Output}              % set the Output
+    \SetKwInput{KwConstant}{Constant}
+    \DontPrintSemicolon
+    \BlankLine
+    \KwInput{\FuncSty{available\_cpu\_quota, nr\_not\_running\_apps}}
+    \KwOutput{Assigned CPU quota: \emph{next\_quota}}
+    \KwConstant{\ArgSty{MIN\_QUOTA, DEFAULT_QUOTA}}
+    %\BlankLine
+    \algrule
+% Set Function Names
+   \nonl\emph{CPU Quota Assignment not running apps:}\;
+   {
+  \BlankLine
+        \If{available\_cpu\_quota < MIN\_QUOTA}
+        {\KwRet next\_quota}
+        elapsed\_time = app$\rightarrow$GetElapsedTimeSinceStart()\;
+        total\_time = elapsed\_time + expected\_chk\_time\;
+        expected\_chk\_overhead = expected\_chk\_time/total\_time\;}
+        \BlankLine
+        \KwRet expected\_chk\_overhead\;
+    \BlankLine
+   \caption{Estimation of checkpoint overhead algorithm.}
+   \label{alg:notrun}
+\end{algorithm}

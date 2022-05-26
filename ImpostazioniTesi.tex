@@ -1,0 +1,381 @@
+% ------------------------------------------------------------------------ %
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = pdflatex
+% !TEX root = Tesi.tex
+% !TEX spellcheck = it-IT
+% ------------------------------------------------------------------------ %
+%
+% ------------------------------------------------------------------------ %
+% 	PREAMBOLO - SETUP
+% ------------------------------------------------------------------------ %
+% Comandi personali
+% ------------------------------------------------------------------------ %
+%
+\newcommand{\myName}{Miriam Peta}			% autore
+\newcommand{\myMatricola}{900122}			% matricola
+\newcommand{\myTitle}{Modello di Tesi di Laurea in \LaTeX{}}	% titolo
+\newcommand{\myUni}{Politecnico di Milano}		% università
+\newcommand{\myFaculty}{Scuola di Ingegneria Industriale e dell'Informazione}	% facoltà/scuola
+\newcommand{\myDegree}{Computer Science and Engineering}		% laurea
+\newcommand{\myThesis}{Tesi di Laurea Magistrale}	% tipo di tesi
+\newcommand{\myDepartment}{Dipartimento di Meccanica}	% dipartimento
+\newcommand{\myProf}{Prof.~Charles~Dickens}		% relatore
+\newcommand{\myOtherProf}{Ing.~Emilio~Salgari}		% eventuale correlatore
+\newcommand{\myLocation}{Milano}			% dove
+\newcommand{\myTime}{Aprile 2021}			% quando
+\newcommand{\myAcademicYear}{2012--2013}		% anno accademico
+\newcommand{\myLogo}{logoPoliMi}			% logo
+\newcommand{\myLogoCFD}{logoPoliMiCFD}		% logo CFD :-)
+\newcommand{\myUrlUni}{www.polimi.it}			% sito PoliMi
+\newcommand{\myUrlFaculty}{www.ingindinf.polimi.it}	% sito Facoltà
+%
+% ------------------------------------------------------------------------ %
+% Impostazioni di amsmath, amssymb, amsthm
+% ------------------------------------------------------------------------ %
+%
+% un ambiente per i sistemi
+\newenvironment{sistema}%
+	{\left\lbrace\begin{array}{@{}l@{}}}%
+	{\end{array}\right.}
+%
+% epsilon theta rho phi
+\renewcommand{\epsilon}{\varepsilon}
+\renewcommand{\theta}{\vartheta}
+%\renewcommand{\rho}{\varrho}
+\renewcommand{\phi}{\varphi}
+%
+\renewcommand{\vec}{\mathbf} 	% vettori in tondo nero
+%
+% ------------------------------------------------------------------------ %
+% Impostazioni di biblatex
+% ------------------------------------------------------------------------ %
+%
+% -- commentare o cancellare tutto se si desidera bibliografia standard
+%
+% I comandi seguenti saranno poi usati in Bibliografia.tex
+% per suddividere i riferimenti bibliografici tra materiale citato
+% e materiale non citato nel testo, con l'ulteriore distinzione in
+% materiale cartaceo e materiale online (con link)
+%
+% Al termine si riportano anche pubblicazioni legate a Latex
+% e alla stesura della tesi di laurea
+%
+\newcommand{\bibtitolocitati}{Riferimenti citati nel testo}
+\newcommand{\bibtitolocitaticarta}{Pubblicazioni e Manuali}
+\newcommand{\bibtitolocitatiweb}{Materiale Online}
+\newcommand{\bibtitolononcitati}{Ulteriore materiale consultato}
+\newcommand{\bibtitolononcitaticarta}{Pubblicazioni e Manuali}
+\newcommand{\bibtitolononcitatiweb}{Materiale Online}
+\newcommand{\bibtitololatex}{{\LaTeX{}}}
+%
+\DeclareBibliographyCategory{citati}
+%
+\defbibheading{citati-cartacei}{\subsection*{\bibtitolocitaticarta}}
+\defbibheading{citati-web}{\subsection*{\bibtitolocitatiweb}}
+\defbibheading{non-citati}{\section*{\bibtitolononcitati}}
+\defbibheading{non-citati-cartacei}{\subsection*{\bibtitolononcitaticarta}}
+\defbibheading{non-citati-web}{\subsection*{\bibtitolononcitatiweb}}
+\defbibheading{latex}{\subsection*{\bibtitololatex}}
+%
+\AtEveryCitekey{\addtocategory{citati}{\thefield{entrykey}}}
+%
+\AtEveryBibitem{
+    \clearfield{doi}
+    \clearfield{eprint}
+}
+%
+\nocite{*}	% manda in bibliografia anche tutte le opere non citate
+%
+% ------------------------------------------------------------------------ %
+%
+% Decommentare i comandi che seguono
+% se si vuole ripristinare bibliografia standard
+% (commentando tutto il blocco precedente)
+%
+%\defbibheading{bibliography}{%
+%	\cleardoublepage%
+%	\phantomsection%
+%	\addcontentsline{toc}{chapter}{\bibname}%
+%	\chapter*{\bibname\markboth{\bibname}{\bibname}}%
+%	}
+%
+% ------------------------------------------------------------------------ %
+% Impostazioni di xcolor
+% ------------------------------------------------------------------------ %
+%
+% webcolors
+\definecolor{webgreen}{rgb}{0,.5,0}
+\definecolor{webbrown}{rgb}{.6,0,0}
+%
+% BluePolimi (colori delle presentazioni PPT del Politecnico di Milano)
+\definecolor{darkbluePoliMi}{rgb}{0,0.18,0.40}	%rgb(0, 46, 103)
+\definecolor{midbluePoliMi}{rgb}{0.33,0.47,0.62}	%rgb(84, 121, 157)
+\definecolor{lightbluePoliMi}{rgb}{0.53,0.64,0.73}	%rgb(134, 163, 186)
+\definecolor{orangePoliMi}{rgb}{1,0.59,0}		%rgb(255, 151, 0)
+%
+% redSapienza (rosso Sapienza)
+\definecolor{redSapienza}{rgb}{0.514,0.031,0.165}	%rgb(131, 8, 42)
+%
+% ------------------------------------------------------------------------ %
+% Impostazioni di listings
+% ------------------------------------------------------------------------ %
+%
+\lstset{
+	basicstyle=\smaller[0]\ttfamily,		% Black & White:
+	keywordstyle=\color{RoyalBlue},	% keywordstyle=\color{black}\bfseries,
+	commentstyle=\color{webgreen},	% commentstyle=\color{gray},
+	stringstyle=\color{webbrown},		% stringstyle=\color{black},
+	numbers=left,
+	numberstyle=\smaller[2],
+	stepnumber=1,
+	numbersep=8pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	breaklines=true,
+	frameround=ffff,
+	frame=single,
+	tabsize=2,
+	captionpos=t,
+	breakatwhitespace=false,
+	}
+%
+% Solution to the encoding issue
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\`e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ù}{{\`u}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ù}{{\`U}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\EUR}}1 {£}{{\pounds}}1
+}
+%
+% Definizione ambienti per i vari linguaggi
+%
+\lstnewenvironment{Matlab}{\lstset{language=Matlab}}{}
+%
+\lstnewenvironment{C++}{\lstset{language=C++}}{}
+%
+\lstnewenvironment{bash}{\lstset{language=bash}}{}
+%
+%
+% Comando per dare nome alla lista dei codici
+%
+\addto\captionsitalian{\renewcommand{\lstlistingname}{Codice}}
+%
+\addto\captionsitalian{\renewcommand{\lstlistlistingname}{Elenco dei codici}}
+%
+%\renewcommand{\lstlistingname}{Elenco dei codici}
+%\renewcommand{\lstlistlistingname}{\lstlistingname}
+%
+% ------------------------------------------------------------------------ %
+% Impostazioni di hyperref
+% ------------------------------------------------------------------------ %
+%
+% per la descrizione delle varie opzioni vedere
+% la guida del pacchetto hyperref
+%
+\hypersetup{
+	%hyperfootnotes=false,
+	%plainpages=false,
+	%pdfpagelabels,
+	colorlinks=true,
+	linktocpage=true,	% true=link nei numeri pagina / false=link nel titolo
+	pdfstartpage=1,
+	pdfstartview=FitV,
+	breaklinks=true,
+	pageanchor=true,
+	pdfpagemode=UseOutlines,
+	%bookmarksnumbered,
+	%bookmarksopen=true,
+	bookmarksopenlevel=1,
+	hypertexnames=true,
+	pdfhighlight=/O,
+	urlcolor=black,		% colore dei link a pagine web
+	linkcolor=black,		% colore dei collegamenti nel testo
+	citecolor=black,		% colore delle citazioni
+	pdftitle={\myTitle},		% da qui in poi compilazione metadati
+	pdfauthor={\textcopyright\ \myName, \myUni},
+	pdfsubject={},
+	pdfcreator={pdfLaTeX},
+	pdfproducer={LaTeX with hyperref},
+	pdfkeywords={polimi,
+		tesi,
+		latex,
+		laurea,
+		dottorato,
+		scribd},
+}
+%
+% comando per inviare mail
+\newcommand{\mail}[1]{\href{mailto:#1}{\texttt{#1}}}
+%
+% Si possono avere tutti i collegamenti in nero e senza riquadri
+% scrivendo semplicemente:
+% \hypersetup{hidelinks}
+%
+% ------------------------------------------------------------------------ %
+% Impostazioni di graphicx
+% ------------------------------------------------------------------------ %
+%
+% Elenco dei percorsi in cui saranno cercate le immagini da inserire
+%
+% In questo modo non è necessario specificare il percorso relativo
+% dell'immagine all'interno di \includegraphics{}, ma solo il nome.
+%
+% N.B. assicurarsi che non siano presenti più immagini
+% con lo stesso nome.
+%
+\graphicspath{
+	{Images/}
+	{Images/Introduction/}
+	{Images/StateOfTheArt/}
+	{Images/Implementation/}
+	{Images/ExperimentalEvaluation/}
+	}
+%
+% ------------------------------------------------------------------------ %
+% Impostazioni di caption
+% ------------------------------------------------------------------------ %
+%
+\captionsetup{tableposition=top,
+	figureposition=bottom,
+	font=small,
+	format=hang,
+	labelfont=bf}
+%
+% ------------------------------------------------------------------------ %
+% Impostazioni di fancyhdr
+% ------------------------------------------------------------------------ %
+%
+% Impostazioni preferibili, ma NON del tutto adeguate alle norme POLIMI
+% N.B. si possono usare queste impostazioni senza problemi anche per il PoliMi.
+%
+\pagestyle{fancy}			% sostituisce \pagestyle{header} standard
+%
+%\renewcommand{\chaptermark}[1]{	% ridefinisce indicazione capitolo
+%	\markboth{\chaptername\ \thechapter.\ #1}{}}
+%
+\makeatletter 			% necessary for using \@chapapp
+\renewcommand{\chaptermark}[1]{	% ridefinisce indicazione capitolo
+  \markboth{\@chapapp\ \thechapter.\ #1}{}} % distinzione 'Capitolo' / 'Appendice'
+\makeatother
+%
+\renewcommand{\sectionmark}[1]{	% ridefinisce indicazione sezione
+	\markright{\thesection.\ #1}}
+%
+\fancyhf{}				% svuota testatine e piede
+%
+\fancyhead[LE,RO]{\scshape\thepage}	% numero pagine in alto
+%
+\fancyhead[LO]{\rightmark}	% info sezione nelle pag. dispari
+%
+\fancyhead[RE]{\scshape\leftmark}	% info capitolo nelle pag.pari
+%
+\renewcommand{\headrulewidth}{0.4pt}	% spessore linea header
+%
+\renewcommand{\footrulewidth}{0pt}	% spessore linea footer (0pt=nascosta)
+%
+\fancypagestyle{plain}{				% ridefinizione stile inizio capitolo
+		\fancyhead{}			% header vuoto
+		\fancyfoot[C]{\bfseries\thepage}		% numeri in grassetto al centro
+		\renewcommand{\headrulewidth}{0pt}	% no linea
+		}
+%
+% ------------------------------------------------------------------------ %
+%
+% Impostazioni maggiormente in linea con le norme POLIMI
+% (decommentare l'intero blocco e commentare il blocco precedente)
+%
+% N.B. si possono usare le impostazioni precedenti senza problemi anche
+% per il PoliMi (e infatti io ho usato le precedenti). Il mio consiglio è di
+% usare, tra le 2 versioni proposte, quella sopra.
+%
+%\pagestyle{fancy}			% sostituisce \pagestyle{header} standard
+%%
+%\makeatletter 			% necessary for using \@chapapp
+%\renewcommand{\chaptermark}[1]{%
+%  \markboth{\@chapapp\ \thechapter.\ #1}{}} % distinzione 'Capitolo' / 'Appendice'
+%\makeatother
+%%
+%\fancyhf{}				% svuota testatine e piede
+%%
+%\fancyfoot[LE,RO]{\bfseries\thepage}	% numero pagine in basso
+%%
+%\fancyhead[RO]{\bfseries\leftmark}	% info capitolo pagine dispari
+%%
+%\fancyhead[LE]{\bfseries\leftmark}	% info capitolo pagine pari
+%%
+%\renewcommand{\headrulewidth}{0.4pt}	% spessore linea header
+%%
+%\renewcommand{\footrulewidth}{0pt}	% spessore linea footer (0pt=nascosta)
+%%
+%\fancypagestyle{plain}{				% ridefinizione stile inizio capitolo
+%		\fancyhf{}				% header e footer azzerati
+%		\fancyfoot[C]{\bfseries\thepage}		% numero di pagina al centro
+%		\renewcommand{\headrulewidth}{0pt}	% no linea header
+%		}
+%
+% ------------------------------------------------------------------------ %
+% Impostazioni degli acronimi
+% ------------------------------------------------------------------------ %
+%
+% descrizione acronimi GIUSTIFICATA
+\makeatletter
+\def\bflabel#1{{\textbf{\textsf{#1}}\hfill}}
+\renewenvironment{AC@deflist}[1]%
+{\ifAC@nolist%
+\else%
+\begin{list}{}%
+{\settowidth{\labelwidth}{\textbf{\textsf{#1}}}%
+\setlength{\leftmargin}{\labelwidth}%
+\addtolength{\leftmargin}{\labelsep}%
+\renewcommand{\makelabel}{\bflabel}}%
+\fi}%
+{\ifAC@nolist%
+\else%
+\end{list}%
+\fi}%
+\makeatother
+%
+% ------------------------------------------------------------------------ %
+% Altro
+% ------------------------------------------------------------------------ %
+%
+% Gradiente
+\newcommand{\gradiente}[1]{$\nabla #1$}
+%
+% puntini di omissione [...]
+\newcommand{\omissis}{[\dots\negthinspace]}
+%
+% Eccezioni all'algoritmo di sillabazione
+\hyphenation{OpenFOAM}
+\hyphenation{Matlab}
+\hyphenation{bash}
+%
+% ------------------------------------------------------------------------ %
+% Finezze tipografiche per il Politecnico di Milano
+% ------------------------------------------------------------------------ %
+%
+% Le seguenti modifiche possono essere commentate
+% o adeguate ad un'altra università (es. 'Yale Blue'
+% per l'università di Yale, 'Rosso Sapienza' per La Sapienza..)
+%
+% Filetti tabelle colorati
+\arrayrulecolor{darkbluePoliMi}
+%
+%
+% Righe delle note a piè di pagina colorate
+\renewcommand{\footnoterule}{%
+  \kern -3pt
+  {\color{darkbluePoliMi} \hrule width 0.4\textwidth}
+  \kern 2.6pt
+}
+\linespread{1.2}
+%
+% ------------------------------------------------------------------------ %

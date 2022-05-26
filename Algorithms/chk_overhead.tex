@@ -1,0 +1,27 @@
+\begin{algorithm}
+    \SetKwInput{KwInput}{Input}                % Set the Input
+    \SetKwInput{KwOutput}{Output}              % set the Output
+    \DontPrintSemicolon
+    \BlankLine
+    \KwInput{Application descriptor \emph{app}}
+    \KwOutput{Estimated checkpoint overhead}
+    %\BlankLine
+    \algrule
+% Set Function Names
+    \SetKwFunction{Func}{ComputeExpectedCheckpointOverhead}
+% Write Function with word ``Def''
+  \SetKwProg{Fn}{Def}{:}{}
+  \Fn{\Func{$app$}}{
+  \BlankLine
+        mean\_chk\_time = app$\rightarrow$GetCheckpointLatencyMean()\;
+        elapsed\_time = app$\rightarrow$GetElapsedTimeSinceStart()\;
+        total\_time = elapsed\_time + expected\_chk\_time\;
+        nr\_completed\_chk = app$\rightarrow$GetNrPerformedCheckpoints()\;
+        sum\_chk\_time = (nr\_completed\_chk +1) * mean\_chk\_time\;
+        expected\_chk\_overhead = sum\_chk\_time/total\_time\;}
+        \BlankLine
+        \KwRet expected\_chk\_overhead\;
+    \BlankLine
+   \caption{Estimation of checkpoint overhead algorithm.}
+   \label{alg:chk_overhead}
+\end{algorithm}

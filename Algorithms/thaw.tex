@@ -1,0 +1,38 @@
+\begin{algorithm}[t]
+    \SetKwInput{KwInput}{Input}                % Set the Input
+    \SetKwInput{KwOutput}{Output}              % set the Output
+    \DontPrintSemicolon
+    \BlankLine
+    \KwInput{\FuncSty{available\_cpu\_quota, nr\_cpu\_cores\_resumed\_from\_idle}}
+ %   \KwInput{\FuncSty{nr\_cpu\_cores\_resumed\_from\_idle}}
+    \KwOutput{None}
+    %\BlankLine
+    \algrule
+% Set Function Names
+    \SetKwFunction{Func}{ThawFrozenExecutions}
+% Write Function with word ``Def''
+  \SetKwProg{Fn}{Def}{:}{}
+  \Fn{\Func{available\_cpu\_quota,  nr\_cpu\_cores\_resumed\_from\_idle}}{
+  \BlankLine
+        resumed\_cores = nr\_cpu\_cores\_resumed\_from\_idle\; 
+        \While{resumed\_cores > 0}
+        {
+            app = GetNextFrozen()\;
+            prev\_quota = app$\rightarrow$GetPrevQuota()\tcp*[r]{last quota}
+            \eIf{prev\_quota/100 > resumed\_quota}
+            {
+                 assigned\_quotas[app] = resumed\_cores*100\;
+                 resumed\_cores = 0 \;
+            }{
+                assigned\_quotas[app] = prev\_quota\;
+                resumed\_cores -= prev\_quota/100\;
+            }
+            available\_cpu\_quota -= assigned\_quotas[app]\;
+            Thaw(app)\;
+        }
+    }
+        \BlankLine
+    \BlankLine
+   \caption{Process Thawing algorithm.}
+   \label{alg:thaw}
+\end{algorithm}

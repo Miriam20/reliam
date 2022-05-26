@@ -1,0 +1,28 @@
+% ------------------------------------------------------------------------ %
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = pdflatex
+% !TEX root = ../Tesi.tex
+% !TEX spellcheck = it-IT
+% ------------------------------------------------------------------------ %
+%
+% ------------------------------------------------------------------------ %
+% 	SOMMARIO + ABSTRACT
+% ------------------------------------------------------------------------ %
+
+\phantomsection
+%
+\addcontentsline{toc}{chapter}{Abstract}
+%
+\chapter*{Abstract}
+%
+\markboth{Abstract}{Abstract}	% headings
+%
+In today’s world, larger and larger amounts of data are constantly being generated, processed and analyzed, placing High Performance Computing (HPC) systems at the core of major advances in a variety of application areas \cite{marqube_2020}. The transition to exascale-grade HPC \cite{10.1145/3372390}, the increasing number of nodes and the loss of Dennard scaling pose new challenges with respect to the reliability of possibly parallel applications and of the hardware components they run on \cite{4629245}. 
+
+As a response to such problem, we propose a work composed of two pillars, the \emph{Dynamic Checkpoint Rate Tuning} and the \emph{Reliam Resource Allocation Policy}, designed, implemented and integrated in the BarbequeRTRM framework, to enforce, respectively, fault tolerance and reliability, both of them without neglecting their impact on the performance. On one hand, the Dynamic Checkpoint Rate Tuning consists in a \emph{smart} and \emph{application-aware} checkpoint scheduler, whose logic guarantees the application requirements in terms of checkpoint rate, while bounding its overhead under a user defined threshold. On the other hand, the Reliam Resource Allocation Policy makes use of run time information coming from the monitoring of the computing resources, in order to carry out a reliability-aware resource binding. Moreover, a controller is provided to the each application of the system, in order to quantify the \emph{CPU quota} to assign, meeting application-specific and/or system wise performance and usage objectives.  The result the Reliam Resource Allocation Policy wants to achieve is an improvement not only in the reliability of the applications, which are going to be executed on the processing elements marked as \emph{not critical} by means of a periodical profiling, but also in the slowdown of the hardware components aging. Finally, the presence of a customized controller, upon which use-cases are provided as a guideline on the controlling parameters, allows the minimization of the CPU utilization, while permitting the prioritization of one or more application with respect to the others.
+
+%\endgroup
+
+%\vfill
+%
+% ------------------------------------------------------------------------ %

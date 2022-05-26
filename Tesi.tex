@@ -1,0 +1,362 @@
+% ------------------------------------------------------------------------ %
+% Modello di tesi di laurea o di dottorato
+% di Luca Maggiori (C) 
+%
+% basato sul modello proposto da Lorenzo Pantieri
+% (http://www.lorenzopantieri.net/LaTeX.html)
+% e con la possibilità di attivare le impostazioni
+% di impaginazione previste dal Politecnico di Milano
+%
+% versione 1.0	-- 4 maggio 2014
+%	- prima versione completa
+% versione 1.1	-- 5 maggio 2014
+%	- aggiunta codici di esempio
+%	- attivazione elenco dei codici
+% ------------------------------------------------------------------------ %
+%
+%
+% ------------------------------------------------------------------------ %
+% Le impostazioni specifiche per il Politecnico di Milano
+% sono definite sulla base del seguente documento:
+% http://www.ingind.polimi.it/cms/file/1262/Norme_per_la_stesura_di_tesi_di_laurea_specialistica.pdf
+% già presente nella cartella AltroMateriale
+%
+% Alcune delle impostazioni sono commentate e sostituite
+% da altre ritenute in qualche modo 'migliori'; possono
+% essere ripristinate commentando/decommentando i vari comandi
+% ------------------------------------------------------------------------ %
+%
+%
+% ------------------------------------------------------------------------ %
+% I seguenti commenti speciali impostano:
+% - applemac come codifica di input,
+% - PDFLaTeX come motore di composizione;
+% - Tesi.tex come documento principale;
+% - il controllo ortografico italiano per l'editor.
+%
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = pdflatex
+% !TEX root = Tesi.tex
+% !TEX spellcheck = it-IT
+% ------------------------------------------------------------------------ %
+%
+%
+% ------------------------------------------------------------------------ %
+% 	PREAMBOLO
+% ------------------------------------------------------------------------ %
+%
+
+%% IMPLEMENTATION %%
+%--------------------------%
+% Introduction 
+% -> The BarbequeRTRM
+% ---> Hardware reliability support
+% -> DCWorms
+% -> Hardware reliability monitoring (BSC?)
+% Dynamic checkpoint-rate tuning
+% -> Design
+% -> Implementation
+% The Reliam resource allocation policy
+% -> Design
+% -> Implementation in the BarbequeRTRM
+% -> Implementation in DCWorms
+
+%% EXPERIMENTAL RESULTS %%
+%--------------------------%
+% Single Node
+% -> Checkpoint rate control
+% -> Temperature/MTTF
+% Multi Node
+% -> Scalability
+% Heterogeneous
+% -> FPGA
+% -> GPU
+
+
+
+\documentclass[12pt,	% 10-11-12pt (12pt preferibile)
+	a4paper,		%
+	twoside,		% fronte-retro
+	openright,		% nuovi capitoli iniziano nella pagina dispari
+	titlepage,% 	% nuova pagina dopo il titolo (necessario per frontespizio)
+	]{book}
+%
+% ------------------------------------------------------------------------ %
+%
+\usepackage[T1]{fontenc}		% codifica di output
+%				% N.B. richiede una distribuzione completa di LaTeX
+%
+\usepackage[utf8]{inputenc}		% codifica di input; anche [latin1] va bene
+%				% N.B. va accordata con le preferenze dell'editor
+%
+\usepackage[english]{babel}	% scelta lingua, sillabazione...
+%				% l'ultima lingua (italiano) sarà la predefinita
+%
+\usepackage{microtype}		% micro-tipografia
+\usepackage{lmodern}
+\usepackage{nimbusmono}
+\usepackage{enumitem}
+
+% ------------------------------------------------------------------------ %
+%
+% 	LAYOUT - MARGINI - RILEGATURA
+%
+% -- AUTOMATICO
+%\usepackage[binding=5mm]{layaureo} 	% margini ottimizzati per l'A4; rilegatura di 5 mm
+%
+% -- MANUALE (Impostazioni PoliMi)
+\usepackage{geometry}
+%
+\geometry{verbose,	% verbose = displays the parameter results on the terminal
+	top=43mm,	% margine superiore (PoliMi=43mm)
+	bottom=44mm,	% margine inferiore (PoliMi=44mm)
+	inner=41mm,	% margine interno pagina (PoliMi=41mm)
+	outer=32mm,	% margine esterno pagina (PoliMi=32mm)
+	bindingoffset=5mm,	% margine per la rilegatura
+	heightrounded}
+%
+% ------------------------------------------------------------------------ %
+%
+%\usepackage[swapnames]{frontespizio}	% frontespizio (elegante ma non previsto al PoliMi)
+%		% per includerlo nel documento bisogna:
+%		% 1. compilare una prima volta Tesi.tex;
+%		% 2. compilare a parte Tesi-frn.tex, generato dalla compilazione precedente;
+%		% 3. compilare ancora Tesi.tex.
+%		% Non è necessario fare questi passaggi altre volte
+%		% se il frontespizio non è più modificato.
+%
+\usepackage{changepage,calc}                 % centra il frontespizio
+%
+\usepackage{emptypage}		% pagine vuote senza testatina e piede di pagina
+%
+\usepackage{indentfirst}		% rientra il primo paragrafo di ogni sezione
+%
+\usepackage{booktabs}		% tabelle (\toprule, \midrule, \bottomrule)
+%
+\usepackage{tabularx}		% tabelle di larghezza prefissata
+%
+\usepackage{graphicx}		% immagini
+%
+\usepackage[figuresright]{rotating}	% tabelle a 90 gradi
+%
+%\usepackage{subfig}			% sottofigure, sottotabelle
+%
+\usepackage{caption}		% didascalie
+%
+\usepackage{listings}		% codici
+%
+\usepackage[font=small]{quoting}	% citazioni
+%
+\usepackage{amsmath}	% matematica
+%
+\usepackage{amssymb}
+\usepackage{mathtools}		% matematica
+%
+\usepackage{amsthm}		% matematica
+
+\usepackage[output-decimal-marker={,}]{siunitx}	% SI (con separatore decimale=virgola)
+%
+\usepackage[italian]{varioref}		% riferimenti completi, con indicazione della pagina (\vref)
+%
+\usepackage{mparhack}	% finezze tipografiche (bug fixes di LaTeX)
+%
+\usepackage{relsize}			% make text larger or smaller than the surrounding text
+% 				% \larger[i] \smaller[i]
+%
+% ------------------------------------------------------------------------ %
+%
+% 	BIBLIOGRAFIA
+%
+% adatta lo stile delle citazioni alla lingua corrente del documento
+\usepackage[autostyle,italian=guillemets]{csquotes}
+%
+% pacchetto biblatex
+%
+% STILI di citazione:
+%style=numeric-comp,	<-- ufficialmente richiesto dal PoliMi (numeri tra [ ])
+% style=philosophy-modern,	<-- autore-anno (meno anonimo, più immediato e più elegante)
+%
+\usepackage[style=numeric-comp,	% numeric-comp oppure philosophy-modern,
+	hyperref,			% riferimenti cliccabili
+	backref,			% link alle pagine in cui il riferimento è citato
+	natbib, 			% mantiene compatibilità con eventuali comandi natbib
+	backend=biber,		% motore bibliografico (v. ArteLatex di Pantieri)
+	defernumbers=true,	 	% riferimenti ordinati in ordine di comparsa
+	]{biblatex}
+%
+\addbibresource{Bibliografia.bib}	% database bibliografico
+%
+% ------------------------------------------------------------------------ %
+%
+% Per generare effettivamente la bibliografia nel documento
+% questa è la sequenza di composizione:
+% 1. si compone il documento con LATEX una prima volta;
+% 2. si lancia il programma Biber premendo l’apposito pulsante dell’editor;
+% 3. si compone il documento altre 2 volte con LATEX (ma anche 3, NdA)
+% Tale sequenza deve essere ripetuta solo se vengono fatte modifiche/aggiunte
+% al database bibliografico.
+%
+% ------------------------------------------------------------------------ %
+%
+\usepackage[table,dvipsnames]{xcolor}	% colori - 68 colori predefiniti:
+% 				% http://en.wikibooks.org/wiki/LaTeX/Colors
+%
+%\usepackage{subfig}
+
+\newcommand{\multiref}[2]{\ref{#1} - \ref{#2}}
+
+\usepackage{subcaption}
+
+\usepackage{lipsum}			% testo fittizio
+%
+\usepackage{eurosym}		% simbolo dell'euro
+%
+\usepackage{hyperref}		% collegamenti ipertestuali
+%
+\usepackage{bookmark}		% gestione segnalibri del PDF
+%
+\usepackage{guit}			% simboli del Guit
+%
+\usepackage{fancyhdr}		% testatine e piede personalizzati
+\setlength{\headheight}{15pt}
+%
+\usepackage{colortbl}		% per colorare i filetti delle tabelle
+%
+\usepackage[footnote,		% descrizione acronimo fatta a piè di pagina
+	smaller,			% acronimo scritto con dimensione ridotta
+	]{acronym}		% acronimi
+%
+\usepackage{multirow}		% celle tabelle alte più di una riga
+%
+\usepackage{pdfpages}		% inclusione di files pdf esterni
+\usepackage{float}
+
+\usepackage[linesnumbered,algoruled,noline]{algorithm2e}
+\usepackage{algorithmic}
+\usepackage{fancyvrb}
+\usepackage{cprotect}
+
+\newcommand\mycommfont[1]{\footnotesize\ttfamily{#1}}
+\SetCommentSty{mycommfont}
+
+
+\newcommand{\comment}[1]{}
+\let\oldnl\nl% Store \nl in \oldnl
+\newcommand{\nonl}{\renewcommand{\nl}{\let\nl\oldnl}}% Remove line number for one line
+
+%
+% ------------------------------------------------------------------------ %
+% 	PREAMBOLO - SETUP
+% ------------------------------------------------------------------------ %
+%
+\input{ImpostazioniTesi}		% file con le impostazioni personali
+%
+%
+% ------------------------------------------------------------------------ %
+% 	BEGIN DOCUMENT
+% ------------------------------------------------------------------------ %
+%
+
+\comment{
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\bfseries\huge}
+  {\filleft\Large\chaptertitlename~\Huge\thechapter}
+  {3ex}
+  {\titlerule\vspace{1.5ex}\filright}
+  [\vspace{1ex}\titlerule]}
+  
+  \makeatletter
+\let\ps@plain\ps@empty
+
+\newcommand{\algrule}[1][.2pt]{\vskip.5\baselineskip\hrule height #1\vskip.5\baselineskip}
+\makeatother
+  
+  \usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\scshape\huge}
+  {\filleft\chaptertitlename~\fontfamily{lmr}\fontshape{sl}\fontsize{100}{90}\selectfont\thechapter}
+  {1ex}
+  {\titlerule\vspace{1.5ex}\filright}
+  [\vspace{1ex}\titlerule]
+ 
+  \comment{
+  \usepackage{fix-cm}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\newcommand{\hsp}{\hspace{0pt}}
+\titleformat{\chapter}[display]
+{\flushright
+\fontseries{b}\fontsize{80}{100}\selectfont}{\fontseries{b}\fontsize{100}{130}\selectfont\thechapter\hsp}{0pt}{\\ \Huge\bfseries}[]
+}
+
+\definecolor{lightblue}{RGB}{135,206,235}
+\definecolor{odd}{RGB}{240,251,254}
+\definecolor{even}{RGB}{225,247,253}
+%\definecolor{odd}{RGB}{227,227,228}
+%\definecolor{even}{RGB}{204,204,205}
+
+\begin{document}
+ %\setlength{\parindent}{0pt}
+%
+% ------------------------------------------------------------------------ %
+% 	FRONTMATTER
+% ------------------------------------------------------------------------ %
+%
+\frontmatter
+%
+%
+% --------- CANCELLARE o COMMENTARE ---------------- %
+\input{FrontMatter/Frontespizio}		% frontespizio figo ma non ufficiale al PoliMi
+
+\cleardoublepage
+% ------------------------------------------------------------------------ %
+%
+% Frontespizio ufficiale del Politecnico di Milano
+
+%
+\input{FrontMatter/Dedica}
+%
+\input{FrontMatter/Indici}
+%
+\input{FrontMatter/Acknowledgements}
+%
+\input{FrontMatter/Sommario}
+%
+\input{FrontMatter/Abstract}
+%
+\cleardoublepage
+%
+% ------------------------------------------------------------------------ %
+% 	MAINMATTER
+% ------------------------------------------------------------------------ %
+%
+\mainmatter
+%
+\input{MainMatter/Introduction}
+\input{MainMatter/StateOfTheArt}
+\input{MainMatter/Implementation}
+\input{MainMatter/ExperimentalEvaluation}
+\input{MainMatter/Conclusions}
+%
+%
+% ------------------------------------------------------------------------ %
+% 	BACKMATTER
+% ------------------------------------------------------------------------ %
+%
+\cleardoublepage
+%
+\backmatter
+%
+%
+\input{BackMatter/Bibliografia}
+%
+%\input{BackMatter/Dichiarazione}
+%
+% ------------------------------------------------------------------------ %
+% 	END DOCUMENT
+% ------------------------------------------------------------------------ %
+%
+\end{document}
+%
+% ------------------------------------------------------------------------ %

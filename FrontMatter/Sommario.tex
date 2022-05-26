@@ -1,0 +1,31 @@
+% ------------------------------------------------------------------------ %
+% !TEX encoding = UTF-8 Unicode
+% !TEX TS-program = pdflatex
+% !TEX root = ../Tesi.tex
+% !TEX spellcheck = it-IT
+% ------------------------------------------------------------------------ %
+%
+% ------------------------------------------------------------------------ %
+% 	SOMMARIO + ABSTRACT
+% ------------------------------------------------------------------------ %
+\cleardoublepage
+\phantomsection
+\selectlanguage{italian}
+%
+\addcontentsline{toc}{chapter}{Sommario}
+%
+\chapter*{Sommario}
+%
+\markboth{Sommario}{Sommario}	% headings
+%
+
+Gli attuali domini applicativi dell'\emph{Information Technology} sono caratterizzati dalla generazione di quantità di dati sempre più ingenti, tali per cui il ricorrere a sistemi di High Performance Computing (HPC) diventa un requisito imprescindibile per l'analisi e il processing degli stessi \cite{marqube_2020}. La transizione verso l'exascale-grade HPC \cite{10.1145/3372390}, il numero sempre più alto di nodi e la fine delle leggi di scala di Dennard pongono nuove sfide riguardanti l'affidabilità delle applicazioni, eventualmente, parallele e dei componenti hardware sui quali vengono eseguite \cite{4629245}.
+
+In risposta a tale problema, proponiamo un lavoro composto da due pilastri, il \emph{Dynamic Checkpoint Rate Tuning} e la \emph{Reliam Resource Allocation Policy}, progettati, implementati e integrati nel framework BarbequeRTRM, per migliorare, rispettivamente, la tolleranza ai guasti e l'affidabilità delle unità computazionali, il tutto tenendo in considerazione il loro impatto sulle performance. Da una parte, il Dynamic Checkpoint Rate Tuning consiste in un checkpoint scheduler \emph{intelligente} e \emph{application-aware}, la cui logica garantisce il soddisfacimento dei requisiti dell'applicazione in termini di frequenza di checkpoint, confinando l'overhead di quest'ultimo al di sotto di una soglia massima definita dall'utente. Dall'altra parte, la Reliam Resource Allocation Policy si serve di informazioni estratte a run time, derivanti dal monitoraggio delle risorse computazionali, al fine di effettuare un'allocazione delle risorse orientata all'affidabilità. Inoltre, ogni applicazione viene dotata di un controllore in grado di assegnare la  quantità di risorse computazionali, sulla base dei requisiti di performance e dell'utilizzo specifico di ogni singola applicazione e/o dell'intero sistema. Il risultato ricercato dalla Reliam Resource Allocation Policy è il miglioramento non solo dell'affidabilità delle applicazioni, che verranno eseguite dagli elementi di elaborazione definiti \emph{non critici} attraverso un profiling periodico, ma anche in termini di rallentamento dell'usura dei componenti hardware. Infine, la presenza di un controllore personalizzabile, permette la minimizzazione dell'utilizzo della CPU, prevedendo contestualmente l'attribuzione di priorità a una o più applicazioni sulle altre.
+
+\selectlanguage{english}
+%\endgroup
+
+%\vfill
+%
+% ------------------------------------------------------------------------ %

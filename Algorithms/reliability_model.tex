@@ -1,0 +1,29 @@
+\begin{algorithm}
+    \SetKwInput{KwInput}{Input}
+    \SetKwInput{KwConstant}{Constant}% Set the Input
+    \SetKwInput{KwOutput}{Output}              % set the Output
+    \DontPrintSemicolon
+    \BlankLine
+
+    \KwInput{CPU load \emph{cpuLoad}}
+    \KwInput{Last observed thermal state \emph{state}}
+    \KwInput{Random number \emph{rand}}
+    \KwConstant{Stress temperature \emph{tStress}}
+    \KwOutput{Reliability level \emph{rel}}
+    %\BlankLine
+    \algrule
+    
+
+\BlankLine
+\SetKwFunction{Funcs}{GetReliability}
+\SetKwProg{Fn}{double}{:}{}
+\Fn{\Funcs{\KwSty{int} cpuLoad, \KwSty{float} rand, \KwSty{float} state}}{
+
+\KwSty{float} temp = GetTemperature(cpuLoad, state)\;
+    \KwSty{double} rel = (1-temp/tStress)*(1-rand)\;
+    \KwRet rel\;
+ }
+    \BlankLine
+   \caption{Reliability model implementation.}
+   \label{alg:rel_model}
+\end{algorithm}

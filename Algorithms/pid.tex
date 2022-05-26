@@ -1,0 +1,56 @@
+\begin{algorithm}
+    \SetKwInput{KwInput}{Input}  
+    \SetKwInput{KwConstant}{Constant}% Set the Input
+    \SetKwInput{KwOutput}{Output}              % set the Output
+    \DontPrintSemicolon
+    \BlankLine
+    \KwInput{Application~descriptor:~\emph{app}}
+    \KwOutput{Assigned CPU quota: \emph{next\_quota}}
+    \KwConstant{\ArgSty{ADMISSIBLE\_DELTA, NEG\_DELTA, Kp, Ki, Kd}}
+    %\BlankLine
+    \algrule
+% Set Function Names
+% Write Function with word ``Def''
+ \nonl\emph{Modified PID Controller:}\;
+\BlankLine
+  {
+    prev\_quota = app$\rightarrow$GetPrevQuota()\;
+    cpu\_usage = app$\rightarrow$GetCPUUsage()\;
+    delta = prev\_quota - cpu\_usage\;
+    error = ADMISSIBLE\_DELTA/2 - delta\;
+    
+   
+    \uIf{delta == 0 \tcp*[r]{all assigned resources have been used}}
+    {
+        delta = \ArgSty{NEG\_DELTA}
+    }
+    
+    \ElseIf{ (abs(error) < ADMISSIBLE\_DELTA/2)}
+        {error = 0\tcp*[r]{admissible range}
+        app$\rightarrow$StoreIerr(0)\;
+        app$\rightarrow$StoreDerr(0)\;}
+    
+    pvar = Kp*error\tcp*[r]{PROPORTIONAL CONTROLLER}
+
+    
+    ierr = error + app$\rightarrow$ierr\;
+    app$\rightarrow$StoreIerr(ierr)\;
+    ivar = Ki*ierr\tcp*[r]{INTEGRAL CONTROLLER}
+    
+   
+    derr = error - app$\rightarrow$derr\; 
+     app$\rightarrow$StoreDerr(derr)\;
+    dvar = Kd*derr \tcp*[r]{DERIVATIVE CONTROLLER}
+
+    cv = pvar + ivar + dvar\tcp*[r]{control variable}
+    
+     next\_quota = prev\_quota + cv\tcp*[r]{assigned quota}
+     \KwRet{next\_quota}
+  \BlankLine
+        
+    }
+        \BlankLine
+    \BlankLine
+   \caption{Modified PID controller algorithm.}
+   \label{alg:pid}
+\end{algorithm}

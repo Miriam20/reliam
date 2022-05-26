@@ -1,0 +1,30 @@
+\begin{algorithm}
+    \SetKwInput{KwInput}{Input}
+    \SetKwInput{KwOutput}{Output}              % set the Output
+    %\DontPrintSemicolon
+    \BlankLine
+
+    \KwInput{Current temperature \emph{temp}}
+
+    \KwOutput{Acceleration factor \emph{af}}
+    %\BlankLine
+    \algrule
+    
+
+\BlankLine
+\SetKwFunction{Funcs}{GetAccelerationFactor}
+\SetKwProg{Fn}{double}{:}{}
+\Fn{\Funcs{\KwSty{float} temp}}{
+    \KwSty{double} act\_energy = 0.7\;
+    \KwSty{double} boltzmann = 8.617333262145 * (1 / pow(10, 5))\;
+    \KwSty{double} t\_use = 328.0\;
+    \KwSty{double} t\_stress = temp + 273.15\;
+    \KwSty{double} af\;
+    \KwSty{double} exp = (act\_energy / boltzmann) * (1.0 / t\_use - 1.0 / t\_stress)\;
+    \KwSty{double} af = pow(e, exp)\;
+    \KwRet af\;
+ }
+    \BlankLine
+   \caption{Computation of the acceleration factor.}
+   \label{alg:acc_fac}
+\end{algorithm}
